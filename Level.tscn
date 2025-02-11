@@ -1,0 +1,119 @@
+[gd_scene load_steps=15 format=3 uid="uid://dhebax2h8ajbe"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_l6crk"]
+[ext_resource type="Script" path="res://water.gd" id="2_vtrs2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnf3j"]
+size = Vector3(10, 0.001, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6so0"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6gidp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f1p8n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1upt8"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u4hk2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_765t6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc1a2"]
+albedo_color = Color(0, 0.466667, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6q1ml"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_op3a5"]
+
+[sub_resource type="Sky" id="Sky_n4wek"]
+sky_material = SubResource("ProceduralSkyMaterial_op3a5")
+
+[sub_resource type="Environment" id="Environment_5nvl7"]
+background_mode = 2
+sky = SubResource("Sky_n4wek")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_pnf3j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_m6so0")
+mesh = SubResource("PlaneMesh_6gidp")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("1_l6crk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_f1p8n")
+surface_material_override/0 = SubResource("StandardMaterial3D_1upt8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_u4hk2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28903, 8.75569)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.999363, 0.0276392, -0.0225912, -0.00572328, 0.748728, 0.662853, 0.0352353, -0.662301, 0.748409, -0.129511, 6.5629, 5.80247)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(14.7, 0, 0, 0, 2.94, 0, 0, 0, 2.94, 0, -1.44098, 6)
+
+[node name="Water" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("2_vtrs2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Water"]
+mesh = SubResource("BoxMesh_765t6")
+surface_material_override/0 = SubResource("StandardMaterial3D_sc1a2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Water"]
+shape = SubResource("BoxShape3D_6q1ml")
+
+[node name="Water2" type="Area3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 0.2, 0, 1, 0, -5, 0, -4.37114e-08, 0.408163, 0, -2.04082)
+script = ExtResource("2_vtrs2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Water2"]
+mesh = SubResource("BoxMesh_765t6")
+surface_material_override/0 = SubResource("StandardMaterial3D_sc1a2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Water2"]
+shape = SubResource("BoxShape3D_6q1ml")
+
+[node name="Water3" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.08163)
+script = ExtResource("2_vtrs2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Water3"]
+mesh = SubResource("BoxMesh_765t6")
+surface_material_override/0 = SubResource("StandardMaterial3D_sc1a2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Water3"]
+shape = SubResource("BoxShape3D_6q1ml")
+
+[node name="Water4" type="Area3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 0.2, 0, 1, 0, -5, 0, -4.37114e-08, -0.408163, 0, -2.04082)
+script = ExtResource("2_vtrs2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Water4"]
+mesh = SubResource("BoxMesh_765t6")
+surface_material_override/0 = SubResource("StandardMaterial3D_sc1a2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Water4"]
+shape = SubResource("BoxShape3D_6q1ml")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5nvl7")
+
+[connection signal="body_entered" from="Node3D/Water" to="Node3D/Water" method="_on_body_entered"]
+[connection signal="body_entered" from="Node3D/Water2" to="Node3D/Water2" method="_on_body_entered"]
+[connection signal="body_entered" from="Node3D/Water3" to="Node3D/Water3" method="_on_body_entered"]
+[connection signal="body_entered" from="Node3D/Water4" to="Node3D/Water4" method="_on_body_entered"]
